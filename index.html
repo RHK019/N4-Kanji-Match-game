@@ -297,7 +297,7 @@ button.primary-btn:disabled {
     touch-action: manipulation;
 }
 .tile ruby { ruby-align: center; }
-.tile rt { font-size: 0.6em; color: #888; font-weight: normal; }
+.tile rt { font-size: 0.6em; color: #888; font-weight: normal; line-height: 1.2; }
 
 .tile:focus-visible { outline: 3px solid var(--primary-color); outline-offset: 2px; }
 .tile:active:not(.disabled) { transform: translateY(2px) scale(0.98); border-bottom-width: 2px; }
@@ -629,6 +629,7 @@ footer { margin-top: 30px; font-size: 0.95rem; opacity: 0.6; text-align: center;
                                 id: globalId++,
                                 ja: item.ja.trim(),
                                 kana: item.kana ? item.kana.trim() : null,
+                                bn: item.bn ? item.bn.trim() : null,
                                 en: item.en.trim()
                             });
                         });
@@ -721,9 +722,12 @@ footer { margin-top: 30px; font-size: 0.95rem; opacity: 0.6; text-align: center;
                     tile.textContent = pair.ja;
                 }
             } else {
+                        if (pair.bn) {
+            tile.innerHTML = `<ruby>${pair.en}<rt>${pair.bn}</rt></ruby>`;
+        } else {
                 tile.textContent = pair.en;
             }
-            
+        }    
             tile.addEventListener('click', () => handleTileClick(tile));
             return tile;
         }
