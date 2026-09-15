@@ -741,12 +741,15 @@ footer { margin-top: 30px; font-size: 0.95rem; opacity: 0.6; text-align: center;
                     tile.textContent = pair.ja;
                 }
             } else {
-                        if (pair.bn) {
-            tile.innerHTML = `<ruby>${pair.en}<rt>${pair.bn}</rt></ruby>`;
-        } else {
-                tile.textContent = pair.en;
-            }
-        }    
+    if (pair.bn) {
+        tile.innerHTML = `
+            <span class="bn">${pair.bn}</span>
+            <span class="kana">${pair.en}</span>
+        `;
+    } else {
+        tile.textContent = pair.en;
+    }
+}    
             tile.addEventListener('click', () => handleTileClick(tile));
             return tile;
         }
